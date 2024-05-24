@@ -816,7 +816,7 @@ func NewEveApp(
 		// nucleic module
 		denommetadata.NewAppModule(*app.DenomMetadataKeeper, app.BankKeeper),
 		rollapp.NewAppModule(appCodec, app.RollappKeeper),
-		ibctm.NewAppModule(tmLightClientModule),
+		// ibctm.NewAppModule(tmLightClientModule),
 	)
 
 	// BasicModuleManager defines the module BasicManager is in charge of setting up basic,
@@ -834,7 +834,7 @@ func NewEveApp(
 			),
 			alliancemoduletypes.ModuleName: alliancemodule.AppModuleBasic{},
 			// register light clients on IBC
-			// ibctm.ModuleName: ibctm.NewAppModule(tmLightClientModule),
+			ibctm.ModuleName: ibctm.NewAppModule(tmLightClientModule),
 			// wasm08types.ModuleName: wasm08.AppModuleBasic{},
 			// wasmtypes.ModuleName:   wasm.AppModuleBasic{},
 		})
