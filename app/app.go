@@ -683,9 +683,9 @@ func NewEveApp(
 		AddRoute(icahosttypes.SubModuleName, icaHostStack)
 	app.IBCKeeper.SetRouter(ibcRouter)
 
-	clientRouter := app.IBCKeeper.ClientKeeper.GetRouter()
-	tmLightClientModule := ibctm.NewLightClientModule(appCodec, authtypes.NewModuleAddress(govtypes.ModuleName).String())
-	clientRouter.AddRoute(ibctm.ModuleName, &tmLightClientModule)
+	// clientRouter := app.IBCKeeper.ClientKeeper.GetRouter()
+	// tmLightClientModule := ibctm.NewLightClientModule(appCodec, authtypes.NewModuleAddress(govtypes.ModuleName).String())
+	// clientRouter.AddRoute(ibctm.ModuleName, &tmLightClientModule)
 
 	// Create Transfer Keepers
 	app.TransferKeeper = ibctransferkeeper.NewKeeper(
@@ -816,7 +816,7 @@ func NewEveApp(
 		// nucleic module
 		denommetadata.NewAppModule(*app.DenomMetadataKeeper, app.BankKeeper),
 		rollapp.NewAppModule(appCodec, app.RollappKeeper),
-		// ibctm.NewAppModule(tmLightClientModule),
+		//ibctm.NewAppModule(tmLightClientModule),
 	)
 
 	// BasicModuleManager defines the module BasicManager is in charge of setting up basic,
@@ -834,7 +834,7 @@ func NewEveApp(
 			),
 			alliancemoduletypes.ModuleName: alliancemodule.AppModuleBasic{},
 			// register light clients on IBC
-			ibctm.ModuleName: ibctm.NewAppModule(tmLightClientModule),
+			ibctm.ModuleName: ibctm.AppModuleBasic{},
 			// wasm08types.ModuleName: wasm08.AppModuleBasic{},
 			// wasmtypes.ModuleName:   wasm.AppModuleBasic{},
 		})
